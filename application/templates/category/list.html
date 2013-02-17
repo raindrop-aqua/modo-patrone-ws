@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block body %}
+<h1 class="page-title">Categories</h1>
+<ul class="breadcrumb">
+    <li><a href="/admin">Home</a> <span class="divider">/</span></li>
+    <li class="active">Categories</li>
+</ul>
+<div class="well">
+    <table class="table">
+        <thead>
+        <tr>
+            <th style="width: 16px;">&nbsp;</th>
+            <th>Category Name</th>
+            <th>Updated</th>
+            <th>Valid</th>
+        </tr>
+        </thead>
+        {% if categories %}
+        <tbody>
+        {% for category in categories %}
+        <tr>
+            <input type="hidden" value="{{ category.category_id }}">
+            <td><i class='icon-info-sign'></i></td>
+            <td>{{ category.category_name }}</td>
+            <td>{{ category.update_datetime }}</td>
+            <td>{{ category.valid }}</td>
+        </tr>
+        {% endfor%}
+        </tbody>
+        {% endif %}
+    </table>
+</div>
+<div class="btn-toolbar">
+    <a href="/admin/category/init">
+        <button class="btn btn-primary"><i class="icon-wrench"></i> Category Initialize</button>
+    </a>
+</div>
+{% endblock %}

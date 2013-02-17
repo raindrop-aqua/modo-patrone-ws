@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>modo patrone admin</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <style type='text/css'>
+    </style>
+</head>
+<body>
+<div class="navbar">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            <a class="brand" href="/admin">modo patrone</a>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row-fluid row">
+        <div class="span2">
+            <div class="well">
+                <ul class="nav nav-list">
+                    <li><a href="/admin/author/list"><i class='icon-user'></i> Author</a></li>
+                    <li><a href="/admin/kit/list"><i class='icon-cog'></i> Kits</a></li>
+                    <li><a href="/admin/category/list"><i class='icon-info-sign'></i> Categories</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="span10">{% block body %}{% endblock %}</div>
+    </div>
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.1/bootstrap.min.js"></script>
+</body>
+</html>

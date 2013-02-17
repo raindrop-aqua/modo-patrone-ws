@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% block body %}
+<h1 class="page-title">Kits</h1>
+<ul class="breadcrumb">
+    <li><a href="/admin">Home</a> <span class="divider">/</span></li>
+    <li class="active">Kits</li>
+</ul>
+<div class="well">
+    <table class="table">
+        <thead>
+        <tr>
+            <th style="width: 16px;">&nbsp;</th>
+            <th>Kit Name</th>
+            <th>View Count</th>
+            <th>Download Count</th>
+            <th>Category</th>
+            <th>Updated</th>
+        </tr>
+        </thead>
+        {% if kits %}
+        <tbody>
+        {% for kit in kits %}
+        <tr>
+            <input type="hidden" value="{{ kit.kit_id }}">
+            <td><i class='icon-cog'></i></td>
+            <td>{{ kit.kit_name }}</td>
+            <td>{{ kit.view_count }}</td>
+            <td>{{ kit.download_count }}</td>
+            <td>{{ kit.category_name }}</td>
+            <td>{{ kit.update_datetime }}</td>
+        </tr>
+        {% endfor%}
+        </tbody>
+        {% endif %}
+    </table>
+</div>
+{% endblock %}

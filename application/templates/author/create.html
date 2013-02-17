@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+{% block body %}
+<h1 class="page-title">Create Author</h1>
+<ul class="breadcrumb">
+    <li><a href="/admin">Home</a> <span class="divider">/</span></li>
+    <li><a href="/admin/author/list">Authors</a> <span class="divider">/</span></li>
+    <li class="active">Create Author</li>
+</ul>
+<div class="well">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#home" data-toggle="tab">Profile</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+        <form action="/admin/author/create" method="POST">
+            <div class="tab-pane active in" id="home">
+                {% if form.errors.exceptions %}
+                <div class="alert alert-error">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {% for error in form.errors.exceptions %}
+                    <i class='icon-exclamation-sign'></i> {{ error }}<br>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                {{ form.author_id }}
+
+                {{ form.author_name.label }}
+                {{ form.author_name(class="input-middle")|safe }}
+                {% if form.author_name.errors %}
+                <div class="alert alert-error">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {% for error in form.author_name.errors %}
+                    <i class='icon-exclamation-sign'></i> {{ error }}<br>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                {{ form.password.label }}
+                {{ form.password(class="input-large") }}
+                {% if form.password.errors %}
+                <div class="alert alert-error">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {% for error in form.password.errors %}
+                    <i class='icon-exclamation-sign'></i> {{ error }}<br>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                {{ form.password_validate.label }}
+                {{ form.password_validate(class="input-large") }}
+                {% if form.password_validate.errors %}
+                <div class="alert alert-error">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {% for error in form.password_validate.errors %}
+                    <i class='icon-exclamation-sign'></i> {{ error }}<br>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                {{ form.mail_address.label }}
+                {{ form.mail_address(class="input-xlarge") }}
+                {% if form.mail_address.errors %}
+                <div class="alert alert-error">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {% for error in form.mail_address.errors %}
+                    <i class='icon-exclamation-sign'></i> {{ error }}<br>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            <div class="btn-toolbar">
+                <button class="btn btn-primary" onclick="submit();"><i class="icon-save"></i> Save</button>
+                <div class="btn-group">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block body %}
+<h1 class="page-title">Authors</h1>
+<ul class="breadcrumb">
+    <li><a href="/admin">Home</a> <span class="divider">/</span></li>
+    <li class="active">Authors</li>
+</ul>
+<div class="btn-toolbar">
+    <a href="/admin/author/create">
+        <button class="btn btn-primary"><i class="icon-plus"></i> New Author</button>
+    </a>
+</div>
+<div class="well">
+    <table class="table">
+        <thead>
+        <tr>
+            <th style="width: 16px;">&nbsp;</th>
+            <th>Author Name</th>
+            <th>Mail</th>
+            <th>updated</th>
+            <th>valid</th>
+            <th style="width: 26px;">&nbsp;</th>
+        </tr>
+        </thead>
+        {% if authors %}
+        <tbody>
+        {% for author in authors %}
+        <tr>
+            <input type="hidden" value="{{ author.author_id }}">
+            <td><i class='icon-user'></i></td>
+            <td> {{ author.author_name }}</td>
+            <td> {{ author.mail_address }}</td>
+            <td> {{ author.update_datetime }}</td>
+            <td> {{ author.valid }}</td>
+            <td>
+                <a href="/admin/author/update/{{ author.author_id }}"><i class="icon-pencil"></i></a>
+            </td>
+        </tr>
+        {% endfor%}
+        </tbody>
+        {% endif %}
+    </table>
+</div>
+{% endblock %}

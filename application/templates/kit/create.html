@@ -1,0 +1,82 @@
+{% extends "layout.html" %}
+{% block body %}
+<h1 class="page-title">Create Kit</h1>
+<ul class="breadcrumb">
+    <li><a href="/admin">Home</a> <span class="divider">/</span></li>
+    <li><a href="/admin/author/list">Authors</a> <span class="divider">/</span></li>
+    <li><a href="/admin/author/update/{{ form.author_id.data }}">Edit Author</a> <span class="divider">/</span></li>
+    <li class="active">Create Kit</li>
+</ul>
+<div class="well">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#home" data-toggle="tab"><i class="icon-edit"></i> Detail</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+        <form action="/admin/kit/create" method="POST" enctype="multipart/form-data">
+            <div class="tab-pane active in" id="home">
+                {% if form.errors.exception %}
+                <div class="alert alert-error">
+                    {% for error in form.errors.form %}
+                    <i class='icon-exclamation-sign'></i> {{ error }}<br>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                {{ form.author_id }}
+
+                {{ form.kit_name.label }}
+                {{ form.kit_name(class="input-middle")|safe }}
+                {% if form.kit_name.errors %}
+                <div class="alert alert-error">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {% for error in form.kit_name.errors %}
+                    <i class='icon-exclamation-sign'></i> {{ error }}<br>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                {{ form.category_id.label }}
+                {{ form.category_id }}
+
+                {{ form.tags.label }}
+                {{ form.tags(class="input-large")|safe }}
+                {% if form.tags.errors %}
+                <div class="alert alert-error">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {% for error in form.tags.errors %}
+                    <i class='icon-exclamation-sign'></i> {{ error }}<br>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                {{ form.description.label }}
+                {{ form.description(class="input-xxlarge", rows="10")|safe }}
+                {% if form.description.errors %}
+                <div class="alert alert-error">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {% for error in form.description.errors %}
+                    <i class='icon-exclamation-sign'></i> {{ error }}<br>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                {{ form.kit_file.label }}
+                {{ form.kit_file }}
+                {% if form.kit_file.errors %}
+                <div class="alert alert-error">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {% for error in form.kit_file.errors %}
+                    <i class='icon-exclamation-sign'></i> {{ error }}<br>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            <div class="btn-toolbar">
+                <button class="btn btn-primary" onclick="submit();"><i class="icon-save"></i> Save</button>
+                <div class="btn-group">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
