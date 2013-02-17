@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from flask import Module, jsonify, request
+from flask import Module, jsonify, request, abort, send_file
+
 from application.services.facade.kit import KitFacade
+from application.utils import const
 
 kit_api = Module(__name__)
+
 
 @kit_api.route("/kit/create", methods=["GET", "POST"])
 def create_kit():
@@ -28,16 +31,15 @@ def create_kit():
     return jsonify(res)
 
 
-@kit_api.route("/kit/read")
-def read_kit():
+@kit_api.route("/kit/read/<kit_id>", methods=["GET"])
+def read_kit(kit_id):
     json = {
         "request": {
             "substance": {
-                "kit_id": "3b1efa98eac78dd9a887b949c07bc739fcd2d044",
+                "kit_id": kit_id,
             }
         }
     }
-
     req = json.get("request")
     res = KitFacade.read(req)
     return jsonify(res)
@@ -58,7 +60,7 @@ def update_kit():
                 "tags": [u"geo"],
                 "description": u"これはmodoの素晴らしいキットです。\nみなさんぜひご利用ください。\n内容を改変しました。",
                 "valid": True,
-                }
+            }
         }
     }
 
@@ -67,19 +69,23 @@ def update_kit():
     return jsonify(res)
 
 
-@kit_api.route("/kit/download")
-def download_kit():
+@kit_api.route("/kit/download/<kit_id>", methods=["GET"])
+def download_kit(kit_id):
     json = {
         "request": {
             "substance": {
-                "kit_id": "3b1efa98eac78dd9a887b949c07bc739fcd2d044",
+                "kit_id": kit_id,
             }
         }
     }
-
     req = json.get("request")
-    res = KitFacade.download(req)
-    return jsonify(res)
+    ret = KitFacade.download(req).get("response")
+    if ret and ret.get("result") == const.RESPONSE_RESULT_SUCCESSFUL:
+        substance = ret.get("substance")
+        kit_file = substance.get("kit_file")
+        return send_file(filename_or_fp=kit_file, attachment_filename=kit_file.blob_info.filename, as_attachment=True)
+    else:
+        abort(404)
 
 
 @kit_api.route("/kit/list", methods=["POST"])
