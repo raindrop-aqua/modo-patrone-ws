@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flask import Module
+from flask import Module, redirect
 from flask.templating import render_template
 
 from application.services.facade.category import CategoryFacade
@@ -18,6 +18,4 @@ def list_category():
 @category_view.route("/admin/category/init")
 def init_category():
     CategoryFacade.init()
-    res = CategoryFacade.list()
-    categories = res.get("response").get("substance").get("items")
-    return render_template("category/list.html", categories=categories)
+    return redirect("/admin/category/list")
