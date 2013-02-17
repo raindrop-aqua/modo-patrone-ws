@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flask import Module, jsonify
+from flask import Module, jsonify, request
 from application.services.facade.kit import KitFacade
 
 kit_api = Module(__name__)
@@ -43,7 +43,7 @@ def read_kit():
     return jsonify(res)
 
 
-@kit_api.route("/kit/update", methods=["GET", "POSt"])
+@kit_api.route("/kit/update", methods=["GET", "POST"])
 def update_kit():
     json = {
         "request": {
@@ -82,18 +82,7 @@ def download_kit():
     return jsonify(res)
 
 
-@kit_api.route("/kit/list")
+@kit_api.route("/kit/list", methods=["POST"])
 def list_kit():
-    json = {
-        "request": {
-            "substance": {
-                "author_id": "a2e006bc0d489746ee6ac9415da7ef352091bbe8",
-#                "category_id": "c1ac4c51afdd9ed6df0d3d871d38f261b70dcba8",
-#                "tags": []
-            }
-        }
-    }
-
-    req = json.get("request")
-    res = KitFacade.list(req)
+    res = KitFacade.list(request.json)
     return jsonify(res)
