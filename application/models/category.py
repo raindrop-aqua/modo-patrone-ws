@@ -2,6 +2,7 @@
 
 from datetime import datetime
 import hashlib
+import random
 
 from google.appengine.ext import ndb
 from application.utils import const
@@ -33,5 +34,5 @@ class Category(ndb.Model):
 
     @classmethod
     def make_category_id_hash(cls):
-        src = "Category" + str(datetime.now())
+        src = "Category" + str(datetime.now()) + str(random.random())
         return hashlib.sha1(src).hexdigest()
