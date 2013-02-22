@@ -62,7 +62,7 @@ class Kit(ndb.Model):
             "tags": self.tags,
             "description": self.description,
             "valid": self.valid,
-            "kit_file_id": self.kit_file_id,
+            "kit_file_id": str(self.kit_file_id),
             "create_datetime": self.create_datetime.strftime(const.DATETIME_FORMAT),
             "update_datetime": self.update_datetime.strftime(const.DATETIME_FORMAT),
         }
